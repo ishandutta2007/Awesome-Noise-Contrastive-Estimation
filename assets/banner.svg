@@ -35,6 +35,6 @@
         <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
     </text>
     <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#e0e0e0" letter-spacing="2">
-        AWESOME PARADIGMS & ARCHITECTURES
+        AWESOME PARADIGMS &amp; ARCHITECTURES
     </text>
 </svg>
