@@ -56,17 +56,12 @@ flowchart LR
 ```
 
 
-*   **The Analytical Score Matching Era (Traditional Energy Models, Pre-2010)**
-    *   *Concept:* The foundational baseline for estimating unnormalized distributions. Introduced by Hyvärinen (2005), it bypassed the partition function $Z$ by optimizing the model to match the *first derivative of the log-density* with respect to the input ($\nabla_x \ln p(x)$), which mathematically eliminates $Z(\theta)$ because $\nabla_x \ln Z = 0$.
-    *   *Limitation:* Computationally prohibitive for deep architectures. Computing the objective required evaluating the trace of the Hessian matrix ($\nabla_x^2 \ln p(x)$), introducing a severe quadratic scaling ceiling that collapsed when forced into complex, deep neural network configurations.
-*   **The Binary Noise Classification Revolution (Vanilla NCE, 2010–2013)**
-    *   *Concept:* Discarded heavy second-order calculus entirely by framing density estimation as an efficient binary classification task. Formalized by Gutmann and Hyvärinen, it introduced the concept of contrasting true data inputs against a hand-crafted reference noise distribution ($p_n$), letting models optimize parameters via simple, high-speed logistic cross-entropy lines.
-    *   *Significance:* Fully democratized large-scale language modeling. Mnih and Teh (2012) ported NCE into neural word embedding loops (Word2Vec / Skip-Gram), reducing word-generation vocabulary processing costs from $O(|\mathcal{V}|)$ down to a flat, invariant $O(k)$ where $k \ll |\mathcal{V}|$ (typically using just 5 to 20 noise samples).
-*   **The Multi-Class Categorical Scaling Era (InfoNCE / SimCLR, ~2018–2022)**
-    *   *Concept:* Sparked the modern self-supervised computer vision and contrastive representation learning boom [INDEX: 4]. Introduced by Oord et al. via **Contrastive Predictive Coding (CPC)** and polished by Google's **SimCLR (2020)**, it adapted NCE into a multi-class categorical cross-entropy framework (**InfoNCE Loss**) [INDEX: 4, 10]. Instead of matching data against a static external noise distribution, the input data array is passed through parallel stochastic transformation loops [INDEX: 14]. The model treats an alternative augmented view of the same image as the single positive pair, while treating *every other unrelated image inside a massive mini-batch* as a negative noise sample [INDEX: 4].
-*   **The Decoupled Multi-Modal Pair Era (Sigmoid Loss / SigLIP, ~2023–Present)**
-    *   *Concept:* The current modern state-of-the-art foundation standard powering advanced cross-modal token transformers (such as Stable Diffusion 3 and FLUX.1) [INDEX: 10]. It addresses a severe hardware scalability limit embedded within traditional InfoNCE. 
-    *   *Significance:* InfoNCE requires computing a global Softmax denominator normalization across all distributed cluster processes, forcing intensive network bandwidth loops. Modern **SigLIP (Sigmoid Language-Image Pre-training)** pipelines replace InfoNCE by refactoring multi-modal alignment back into independent element-wise binary logistic tasks—fully completing the chronological loop back to the core principles of Fukushima's and Gutmann’s localized binary noise sorting [INDEX: 10].
+| Era/Model | Year | Paper Link | Concept & Details |
+| --- | --- | --- | --- |
+| [**The Analytical Score Matching Era**](pages/analytical_score_matching.md) | 2005 | [Hyvärinen, 2005](https://www.jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf) | **Concept:** The foundational baseline for estimating unnormalized distributions. Bypassed $Z$ by matching the first derivative of the log-density.<br>**Limitation:** Computationally prohibitive for deep architectures. |
+| [**The Binary Noise Classification Revolution**](pages/binary_noise_classification.md) | 2010 | [Gutmann & Hyvärinen, 2010](https://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf) | **Concept:** Framed density estimation as an efficient binary classification task against a reference noise distribution.<br>**Significance:** Democratized large-scale language modeling (Word2Vec). |
+| [**The Multi-Class Categorical Scaling Era**](pages/multi_class_categorical.md) | 2018 | [Oord et al., 2018](https://arxiv.org/abs/1807.03748) | **Concept:** Adapted NCE into a multi-class categorical cross-entropy framework (InfoNCE Loss). Sparked the modern self-supervised computer vision boom. |
+| [**The Decoupled Multi-Modal Pair Era**](pages/decoupled_multi_modal.md) | 2023 | [Zhai et al., 2023](https://arxiv.org/abs/2303.15343) | **Concept:** Modern state-of-the-art foundation standard powering advanced cross-modal token transformers (SigLIP).<br>**Significance:** Replaces InfoNCE by refactoring multi-modal alignment back into independent binary logistic tasks. |
 
 ---
 
@@ -74,18 +69,11 @@ flowchart LR
 
 The Noise-Contrastive family tree features specialized mathematical core modifications engineered to optimize noise selection efficiency, handle large-scale vocabularies, and eliminate explicit negative data sampling.
 
-- ### A. Negative Sampling (NEG / Word2Vec Class)
-	*   **Mechanism:** A highly optimized, simplified approximation of NCE popularized by Mikolov et al. inside the Skip-Gram text processing framework. NEG discards the explicit requirement to cross-reference and incorporate the exact mathematical probability density values of the noise distribution ($p_n(x)$) inside the logistic function, setting the term to a flat constant.
-	*   **Pros:** Slashes mathematical operations, maximizing hardware raw text pre-training velocities.
-	*   **Cons:** Loses strict statistical density estimation guarantees, making it unviable for true probabilistic generative tracking.
-
-- ### B. InfoNCE Loss (Categorical Contrastive Cross-Entropy)
-	*   **Mechanism:** Normalizes a target positive dot product against the exponential sum of all negative dot products within the active batch, scaled by a temperature parameter ($\tau$) [INDEX: 10]:
-	    $$\mathcal{L}_{\text{InfoNCE}} = -\log \frac{\exp(\text{sim}(q, k_+) / \tau)}{\exp(\text{sim}(q, k_+) / \tau) + \sum_{i} \exp(\text{sim}(q, k_i^-) / \tau)}$$
-	*   **Behavior:** Acts as a continuous, dynamic probability filter, forcing unaligned vectors to opposite poles of the latent hypersphere [INDEX: 10].
-
-- ### C. Sample-Gated Conditional NCE
-	*   **Mechanism:** Dynamically updates the parameters of the reference noise distribution ($p_n(x \mid s)$) based on the active local context or state of the network, replacing flat unigram noise frequencies with contextual token clusters to maximize gradient learning efficiency.
+| Variant | Year | Paper Link | Mechanism & Details |
+| --- | --- | --- | --- |
+| [**Negative Sampling (NEG / Word2Vec Class)**](pages/negative_sampling.md) | 2013 | [Mikolov et al., 2013](https://arxiv.org/abs/1310.4546) | **Mechanism:** Simplified approximation of NCE that discards exact probability density values of the noise distribution.<br>**Pros:** Maximizes hardware raw text pre-training velocities.<br>**Cons:** Loses strict statistical density estimation guarantees. |
+| [**InfoNCE Loss**](pages/infonce_loss.md) | 2018 | [Oord et al., 2018](https://arxiv.org/abs/1807.03748) | **Mechanism:** Normalizes a target positive dot product against the exponential sum of all negative dot products.<br>**Behavior:** Continuous, dynamic probability filter forcing unaligned vectors to opposite poles. |
+| [**Sample-Gated Conditional NCE**](pages/sample_gated_nce.md) | 2020 | [Jozefowicz et al., 2016](https://arxiv.org/abs/1602.02410) | **Mechanism:** Dynamically updates parameters of the reference noise distribution based on active local context, replacing flat unigram noise frequencies with contextual token clusters. |
 
 ---
 
@@ -107,10 +95,10 @@ flowchart TB
 ```
 
 
-*   **Cross-Modal Linear Projections**
-    *   *Profile:* Coordinates dimensionality mapping. Because independent text and vision backbones output different hidden state sizes, small Multi-Layer Perceptron (MLP) projection heads append to the terminal gates, compressing coordinates into a unified, shared embedding length (e.g., exactly 768 elements) where vector dot products occur [INDEX: 10].
-*   **Stochastic Augmentation Channels**
-    *   *Profile:* Generates positive pairs natively [INDEX: 4]. Input graphics are passed through parallel GPU-fused transformation loops (random cropping, color jittering, solarization) to create distinct visual variations, forcing the model to ignore surface-level pixel changes [INDEX: 14].
+| Component | Year | Paper Link | Profile |
+| --- | --- | --- | --- |
+| [**Cross-Modal Linear Projections**](pages/cross_modal_projections.md) | 2021 | [Radford et al., 2021](https://arxiv.org/abs/2103.00020) | Coordinates dimensionality mapping. Uses MLP projection heads to compress coordinates into a unified embedding length. |
+| [**Stochastic Augmentation Channels**](pages/stochastic_augmentation.md) | 2020 | [Chen et al., 2020](https://arxiv.org/abs/2002.05709) | Generates positive pairs natively via parallel GPU-fused transformation loops (random cropping, color jittering). |
 
 ---
 
@@ -118,23 +106,20 @@ flowchart TB
 
 Deploying large-scale contrastive learning pipelines across distributed high-performance computing configurations introduces severe memory bus and cluster communication penalties.
 
-*   **The All-Gather Communication and Mini-Batch VRAM Wall**
-    *   *The Problem:* Evaluating the InfoNCE loss function requires tracking thousands of negative samples simultaneously [INDEX: 4]. In multi-node distributed clusters, this forces the system to execute massive, synchronous **`All-Gather` communication primitives** to fetch gradient embeddings from all other cards [INDEX: 22], saturating network switches and stalling GPU tensor cores.
-    *   *Mitigation:* Migrating entirely to **Sigmoid Loss (SigLIP) architectures**, which decompose matrix tracking into independent element-wise tasks [INDEX: 10], or utilizing **Momentum Contrast (MoCo) memory queues**, decoupling the negative sample capacity footprint from the physical mini-batch size.
-*   **The Representation Collapse Deficit (Dead Latent Spaces)**
-    *   *The Problem:* If a self-supervised model discovers that outputting an identical, static vector coordinate for *every single incoming view* mathematically zeros out the contrastive loss optimization graph, parameters lock up permanently, rendering the model useless.
-    *   *Mitigation:* Implementing **Stop-Gradient operations** across asymmetric paths (such as BYOL), or enforcing strict **variance-covariance identity constraints (VICReg structures)** to force full tensor dimension utilization [INDEX: 4].
+| Challenge | Year | Paper Link | Problem & Mitigation |
+| --- | --- | --- | --- |
+| [**All-Gather Communication & Mini-Batch VRAM Wall**](pages/all_gather_vram_wall.md) | 2020 | [He et al., 2020 (MoCo)](https://arxiv.org/abs/1911.05722) | **The Problem:** InfoNCE requires massive synchronous `All-Gather` communication, stalling GPUs.<br>**Mitigation:** Migrating to Sigmoid Loss (SigLIP) or using Momentum Contrast (MoCo) memory queues. |
+| [**Representation Collapse Deficit**](pages/representation_collapse.md) | 2020 | [Grill et al., 2020 (BYOL)](https://arxiv.org/abs/2006.07733) | **The Problem:** Model outputs identical vectors for all views, locking parameters.<br>**Mitigation:** Stop-Gradient operations (BYOL) or variance-covariance constraints (VICReg). |
 
 ---
 
 ## 5. Frontier Real-World AI Industrial Applications
 
-*   **Open-Vocabulary Zero-Shot E-Commerce Semantic Personalization**
-    *   *Application:* Processes millions of incoming marketplace seller inventories daily [INDEX: 4]. High-throughput CLIP/SigLIP vision-text encoders project unstructured item listings into a shared coordinate space, letting consumer search engines match conversational text sentences against arbitrary product photos instantly without human annotation pipelines [INDEX: 10].
-*   **Universal Text Embedding Generation for Enterprise RAG Architectures**
-    *   *Application:* Serves as the critical baseline entry tier powering corporate AI knowledge retrieval [INDEX: 18]. Multi-task contrastive sentence embedding networks process variable-length corporate documentation portfolios, mapping text strings into high-dimensional geometric dense coordinates to execute low-latency vector index search lookups cleanly [INDEX: 18].
-*   **Unsupervised Biomolecular Sequence Alignment & Target Drug Discovery**
-    *   *Application:* Maps unannotated DNA, RNA, or protein peptide chains spanning billions of data lines [INDEX: 4]. Information-maximization contrastive regularizers and Siamese networks group complex biological sequences by structural geometry, accelerating target-specific de novo therapeutic discoveries and tracking viral mutations with high precision [INDEX: 4].
+| Application | Year | Paper Link | Description |
+| --- | --- | --- | --- |
+| [**Open-Vocabulary Zero-Shot E-Commerce**](pages/ecommerce_personalization.md) | 2021 | [Radford et al., 2021](https://arxiv.org/abs/2103.00020) | High-throughput CLIP/SigLIP vision-text encoders project unstructured item listings into a shared space for semantic search. |
+| [**Universal Text Embedding Generation for RAG**](pages/rag_text_embeddings.md) | 2020 | [Karpukhin et al., 2020 (DPR)](https://arxiv.org/abs/2004.04906) | Multi-task contrastive networks process documentation portfolios for low-latency vector search lookups. |
+| [**Unsupervised Biomolecular Sequence Alignment**](pages/biomolecular_alignment.md) | 2021 | [Jumper et al., 2021 (AlphaFold)](https://www.nature.com/articles/s41586-021-03819-2) | Information-maximization regularizers group biological sequences by structural geometry, accelerating drug discovery. |
 
 ---
 
