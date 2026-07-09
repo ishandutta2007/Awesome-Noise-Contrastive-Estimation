@@ -1,5 +1,9 @@
-# Awesome-Noise-Contrastive-Estimation
-## Noise-Contrastive Estimation (NCE): Derivation, Progression, Variants, & Applications
+<p align="center">
+  <img src="assets/banner.svg" alt="Awesome Noise Contrastive Estimation Banner" />
+</p>
+
+# Awesome-Noise-Contrastive-Estimation 🚀
+## 🧠 Noise-Contrastive Estimation (NCE): Derivation, Progression, Variants, & Applications
 
 **Noise-Contrastive Estimation (NCE)** is a foundational statistical optimization and self-supervised density estimation paradigm designed to train parametric models over unnormalized probability distributions. Formally conceptualized by Aapo Hyvärinen and Michael U. Gutmann in 2010 ("Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models"), NCE directly resolved a catastrophic computational bottleneck in energy-based modeling and structural language generation: computing the **Partition Function** ($Z$). 
 
@@ -7,7 +11,7 @@ When a neural network calculates a soft probability distribution over massive mu
 
 ---
 
-## 1. Mathematical Derivation
+## 🧮 1. Mathematical Derivation
 
 The foundational formulation of Noise-Contrastive Estimation reduces the computationally prohibitive task of evaluating a continuous unnormalized probability density function ($p_m(x;\theta)$) into an efficient, stable binary classification objective.
 
@@ -42,7 +46,7 @@ Gutmann and Hyvärinen proved that as noise injection scaling factor $k \rightar
 
 ---
 
-## 2. The Macro Chronological Evolution
+## ⏳ 2. The Macro Chronological Evolution
 
 The technical framework governing contrastive density estimation has transitioned from analytical score matching to binary noise classification, multi-class categorical cross-entropy matrix scaling, and modern open-vocabulary multi-modal joint-embedding engines.
 
@@ -65,7 +69,7 @@ flowchart LR
 
 ---
 
-## 3. Core Functional & Algorithmic Variants
+## ⚙️ 3. Core Functional & Algorithmic Variants
 
 The Noise-Contrastive family tree features specialized mathematical core modifications engineered to optimize noise selection efficiency, handle large-scale vocabularies, and eliminate explicit negative data sampling.
 
@@ -77,7 +81,7 @@ The Noise-Contrastive family tree features specialized mathematical core modific
 
 ---
 
-## 4. The Contrastive Joint-Embedding Execution Matrix
+## 🔗 4. The Contrastive Joint-Embedding Execution Matrix
 
 To map alternative sensory signals cleanly into a single shared workspace without triggering processing latencies, contrastive pipelines route unaligned towers through linear projection heads concurrently.
 
@@ -102,7 +106,7 @@ flowchart TB
 
 ---
 
-## 4. Production Engineering Challenges & Hardware Solutions
+## 🚧 4. Production Engineering Challenges & Hardware Solutions
 
 Deploying large-scale contrastive learning pipelines across distributed high-performance computing configurations introduces severe memory bus and cluster communication penalties.
 
@@ -113,7 +117,7 @@ Deploying large-scale contrastive learning pipelines across distributed high-per
 
 ---
 
-## 5. Frontier Real-World AI Industrial Applications
+## 🏭 5. Frontier Real-World AI Industrial Applications
 
 | Application | Year | Paper Link | Description |
 | --- | --- | --- | --- |
@@ -123,7 +127,7 @@ Deploying large-scale contrastive learning pipelines across distributed high-per
 
 ---
 
-## References
+## 📚 References
 1. Hyvärinen, A. (2005). Estimation of non-normalized statistical models by score matching. *Journal of Machine Learning Research*, 6(4), 695-709.
 2. Gutmann, M., & Hyvärinen, A. (2010). Noise-contrastive estimation: A new estimation principle for unnormalized statistical models. *Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics (AISTATS)*, 297-304.
 3. Mnih, A., & Teh, Y. W. (2012). A fast and simple algorithm for training neural language models. *Proceedings of the 29th International Conference on Machine Learning (ICML)*, 1751-1758.
@@ -141,7 +145,7 @@ To advance this documentation repository, structural optimization setup, or dist
 
 ***
 
-**Follow-Up Options Matrix:**
+🌟 **Follow-Up Options Matrix:**
 
 Before updating this repository layout, let me know how you would like to proceed by choosing one of the options below:
 * I can provide a **complete Python code boilerplate using PyTorch** demonstrating how to write an automated script that calculates an asymmetric noise mixture probability update loop.

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a2a6c;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#b21f1f;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#fdbb2d;stop-opacity:1" />
+        </linearGradient>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        </pattern>
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <rect width="800" height="200" fill="url(#grad)" rx="15" ry="15" />
+    <rect width="800" height="200" fill="url(#grid)" />
+    
+    <g transform="translate(400, 100)">
+        <circle cx="0" cy="0" r="80" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
+            <animate attributeName="r" values="80;90;80" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="0" cy="0" r="50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="10 5">
+            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="15s" repeatCount="indefinite" />
+        </circle>
+    </g>
+
+    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#ffffff" filter="url(#glow)">
+        Noise-Contrastive Estimation
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+    </text>
+    <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#e0e0e0" letter-spacing="2">
+        AWESOME PARADIGMS & ARCHITECTURES
+    </text>
+</svg>
