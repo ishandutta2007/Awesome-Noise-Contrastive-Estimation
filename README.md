@@ -71,18 +71,18 @@ The technical framework governing contrastive density estimation has transitione
 
 The Noise-Contrastive family tree features specialized mathematical core modifications engineered to optimize noise selection efficiency, handle large-scale vocabularies, and eliminate explicit negative data sampling.
 
-### A. Negative Sampling (NEG / Word2Vec Class)
-*   **Mechanism:** A highly optimized, simplified approximation of NCE popularized by Mikolov et al. inside the Skip-Gram text processing framework. NEG discards the explicit requirement to cross-reference and incorporate the exact mathematical probability density values of the noise distribution ($p_n(x)$) inside the logistic function, setting the term to a flat constant.
-*   **Pros:** Slashes mathematical operations, maximizing hardware raw text pre-training velocities.
-*   **Cons:** Loses strict statistical density estimation guarantees, making it unviable for true probabilistic generative tracking.
+- ### A. Negative Sampling (NEG / Word2Vec Class)
+	*   **Mechanism:** A highly optimized, simplified approximation of NCE popularized by Mikolov et al. inside the Skip-Gram text processing framework. NEG discards the explicit requirement to cross-reference and incorporate the exact mathematical probability density values of the noise distribution ($p_n(x)$) inside the logistic function, setting the term to a flat constant.
+	*   **Pros:** Slashes mathematical operations, maximizing hardware raw text pre-training velocities.
+	*   **Cons:** Loses strict statistical density estimation guarantees, making it unviable for true probabilistic generative tracking.
 
-### B. InfoNCE Loss (Categorical Contrastive Cross-Entropy)
-*   **Mechanism:** Normalizes a target positive dot product against the exponential sum of all negative dot products within the active batch, scaled by a temperature parameter ($\tau$) [INDEX: 10]:
-    $$\mathcal{L}_{\text{InfoNCE}} = -\log \frac{\exp(\text{sim}(q, k_+) / \tau)}{\exp(\text{sim}(q, k_+) / \tau) + \sum_{i} \exp(\text{sim}(q, k_i^-) / \tau)}$$
-*   **Behavior:** Acts as a continuous, dynamic probability filter, forcing unaligned vectors to opposite poles of the latent hypersphere [INDEX: 10].
+- ### B. InfoNCE Loss (Categorical Contrastive Cross-Entropy)
+	*   **Mechanism:** Normalizes a target positive dot product against the exponential sum of all negative dot products within the active batch, scaled by a temperature parameter ($\tau$) [INDEX: 10]:
+	    $$\mathcal{L}_{\text{InfoNCE}} = -\log \frac{\exp(\text{sim}(q, k_+) / \tau)}{\exp(\text{sim}(q, k_+) / \tau) + \sum_{i} \exp(\text{sim}(q, k_i^-) / \tau)}$$
+	*   **Behavior:** Acts as a continuous, dynamic probability filter, forcing unaligned vectors to opposite poles of the latent hypersphere [INDEX: 10].
 
-### C. Sample-Gated Conditional NCE
-*   **Mechanism:** Dynamically updates the parameters of the reference noise distribution ($p_n(x \mid s)$) based on the active local context or state of the network, replacing flat unigram noise frequencies with contextual token clusters to maximize gradient learning efficiency.
+- ### C. Sample-Gated Conditional NCE
+	*   **Mechanism:** Dynamically updates the parameters of the reference noise distribution ($p_n(x \mid s)$) based on the active local context or state of the network, replacing flat unigram noise frequencies with contextual token clusters to maximize gradient learning efficiency.
 
 ---
 
