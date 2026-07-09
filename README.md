@@ -49,7 +49,10 @@ The technical framework governing contrastive density estimation has transitione
 
 
 ```mermaid
-[Analytical Score Matching (2005)] ───> [Noise-Contrastive (Gutmann, 2010)] ───> [Global InfoNCE Scaling (SimCLR, 2020)] ───> [Cross-Modal SigLIP (Modern Era)](Hessian-Driven Calculus Scaling)         (Binary Logistic Noise Sorting)             (Multi-Class Categorical Probability)         (Decoupled Asynchronous Pair Matrices)
+flowchart LR
+    A["Analytical Score Matching (2005)<br>(Hessian-Driven Calculus Scaling)"] --> B["Noise-Contrastive (Gutmann, 2010)<br>(Binary Logistic Noise Sorting)"]
+    B --> C["Global InfoNCE Scaling (SimCLR, 2020)<br>(Multi-Class Categorical Probability)"]
+    C --> D["Cross-Modal SigLIP (Modern Era)<br>(Decoupled Asynchronous Pair Matrices)"]
 ```
 
 
@@ -92,7 +95,15 @@ To map alternative sensory signals cleanly into a single shared workspace withou
 
 
 ```mermaid
-Dual-Tower Cross-Modal Alignment Matrix[Raw Visual Canvas] ───> [Vision Encoder (ViT)] ───> [Image Embedding (h_v)] ───规则├──> [Symmetric InfoNCE / Sigmoid Loss][Natural Language] ───> [Text Encoder (Transformer)] ──> [Text Embedding (h_t)] ──┘
+flowchart TB
+    subgraph "Dual-Tower Cross-Modal Alignment Matrix"
+        A["Raw Visual Canvas"] --> B["Vision Encoder (ViT)"]
+        B --> C["Image Embedding (h_v)"]
+        D["Natural Language"] --> E["Text Encoder (Transformer)"]
+        E --> F["Text Embedding (h_t)"]
+        C -- "规则" --> G["Symmetric InfoNCE / Sigmoid Loss"]
+        F --> G
+    end
 ```
 
 
