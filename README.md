@@ -3,6 +3,13 @@
 </p>
 
 # Awesome-Noise-Contrastive-Estimation 🚀
+
+<p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a> <a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
+</p>
+
+> **A curated list of awesome resources, papers, and implementations related to Noise-Contrastive Estimation (NCE), Contrastive Learning, and Self-Supervised Representation Learning. Discover how NCE bypasses the Partition Function bottleneck in Deep Learning!**
+
 ## 🧠 Noise-Contrastive Estimation (NCE): Derivation, Progression, Variants, & Applications
 
 **Noise-Contrastive Estimation (NCE)** is a foundational statistical optimization and self-supervised density estimation paradigm designed to train parametric models over unnormalized probability distributions. Formally conceptualized by Aapo Hyvärinen and Michael U. Gutmann in 2010 ("Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models"), NCE directly resolved a catastrophic computational bottleneck in energy-based modeling and structural language generation: computing the **Partition Function** ($Z$). 
